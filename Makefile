@@ -1,4 +1,4 @@
-CC=clang
+CC=gcc
 CPP=g++
 CFLAGS=-O2 -pipe -ansi 
 CPPFLAGS=-lm -lcrypt -O2 -pipe 
