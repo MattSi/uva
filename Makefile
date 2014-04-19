@@ -4,7 +4,7 @@ CFLAGS=-O2 -pipe -ansi
 CPPFLAGS=-lm -lcrypt -O2 -pipe 
 LIBS=-lm -lcrypt 
 CPPLIBS=-lm -lcrypt -lstdc++
-ALL= 120 112 123 263  264 297 340 400 401 424 548 644 673 755 755ac 10152 10152ac 10010 10115 10361 10815
+ALL= 120 112 123 263  264 297 340 400 401 424 548 644 673 699 755 755ac 839 10152 10152ac 10010 10115 10361 10815
 TESTDIR=./tests/
 all:$(ALL)
 
@@ -35,6 +35,10 @@ all:$(ALL)
 673:673.c
 	$(CC) $< -o $@ $(CFLAGS) $(LIBS) 
 
+699:699.c
+	$(CC) $< -o $@ $(CFLAGS) $(LIBS) 
+839:839.c
+	$(CC) $< -o $@ $(CFLAGS) $(LIBS) 
 400:400.c
 	$(CC) $< -o $@ $(CFLAGS) $(LIBS) 
 
