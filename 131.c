@@ -1,9 +1,10 @@
 #include <stdio.h>
 
-
+/*
 int check_poke(char poke[5][]){
     
 }
+*/
 
 int main(int argc, char* argv[]){
 
