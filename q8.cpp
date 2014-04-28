@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define N 13
+#define N 15
 
 int q[N];
 int check(int k)
@@ -50,8 +50,6 @@ void usage(){
 
 int main(int argc, char* argv[])
 {
-    printf("%d\n", argc);
-    
     queens();
     return 0;
 }
