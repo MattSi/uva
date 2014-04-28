@@ -84,7 +84,6 @@ int main(int argc, char* argv[]){
 #ifndef ONLINE_JUDGE
     FILE* fp = NULL;
     fp = freopen("./tests/10010.in", "r", stdin);
-    fp = freopen("./tests/10010.out","w", stdout);
 #endif
     nouse = scanf("%d", &num);
     while(num--){
