@@ -3,8 +3,8 @@
 #include <stdlib.h>
 
 
-int regi[10];
-int memo[1000];
+int regi[20];
+int memo[2000];
 
 int cal(int num){
     int i;
@@ -14,12 +14,13 @@ int cal(int num){
     while(1){
         cmd = memo[pc];
         count++;
-        if(cmd == 100)
-            break;
         op = cmd / 100;
         s  = cmd % 10;
         d  = (cmd - 100*op) / 10;
         switch(op){
+            case 1:
+                return count;
+                break;
             case 2:
                 regi[d] = s;
                 pc++;
@@ -54,11 +55,12 @@ int cal(int num){
                 break;
             case 0:
                 if(regi[s])
-                    pc = memo[regi[d]];
+                    pc = regi[d];
                 else
                     pc++;
                 break;
             default:
+                pc++;
                 break;
         }
     }
@@ -68,7 +70,7 @@ int cal(int num){
 }
 int main(int argc, char* argv[]){
     int times;
-    int pc;
+    int pc, ind=0;
     char cmd[10];
     size_t len;
 #ifndef ONLINE_JUDGE
@@ -86,7 +88,7 @@ int main(int argc, char* argv[]){
                 len--;
             }
             if(!len){
-                cal(pc);
+                printf("%d\n\n", cal(pc));
                 pc = 0;
                 break;
             }
@@ -95,7 +97,7 @@ int main(int argc, char* argv[]){
             }
         }
         if(pc){
-            cal(pc);
+            printf("%d\n", cal(pc));
             pc = 0;
         }
     }
