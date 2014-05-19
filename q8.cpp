@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define N 15
+#define N 8
 
 int q[N];
 int check(int k)
