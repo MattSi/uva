@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*
 正如文本编辑器允许我们修改文本一样， 图形化的编辑器允许我们修改位图图像。
@@ -22,11 +23,55 @@ S NAME          ： 原样输出文件名以及整幅图像的像素矩阵
 X               ： 推出程序 
 */
 
+#define N 256
+char image[N][N]; 
+
+
+void init(int m, int n){
+	int i, j;
+	for(i=0; i<m; i++){
+		for(j=0; j<n; j++){
+			image[i][j] = 'O';
+		}
+	}
+}
+
 int main(int argc, char **argv){
-
 #ifndef ONLINE_JUDGE
-    freopen("./tests/10267.in", "r", stdin);
+    FILE* fp = freopen("./tests/10267.in", "r", stdin);
 #endif
+	char buff[N];
+	int M, N;
+	while(fgets(buff, sizeof(buff), stdin)!=NULL){
+		size_t len = strlen(buff);
+		if(len > 0 && buff[len - 1] == '\n'){
+			buff[--len] = '\0';
+		}
+		switch(buff[0]){
+			case 'I':
 
+				break;
+			case 'C':
+				break;
+			case 'L':
+				break;
+			case 'V':
+				break;
+			case 'H':
+				break;
+			case 'K':
+				break;
+			case 'F':
+				break;
+			case 'S':
+				break;
+			case 'X':
+				break;
+			default:
+				break;
+		}
+		printf("%s\n", buff);
+	}
+			
 	return 0;
 }
