@@ -30,6 +30,9 @@ X               ： 退出程序
  * */
 
 #define SIZE 256
+#define TRUE '1'
+#define FALSE '0'
+
 char image[SIZE][SIZE]; 
 char marks[SIZE][SIZE];
 
@@ -38,10 +41,10 @@ int M1, M2; /*M1是列，M2是行*/
 void commandC(){
     /*printf("CommandC\n");*/
     int i, j;
-    for(i=1; i<=SIZE; i++)
-        for(j=1; j<=SIZE; j++){
+    for(i=1; i<SIZE; i++)
+        for(j=1; j<SIZE; j++){
             image[i][j] = 'O';
-            marks[i][j] = 0;
+            marks[i][j] = FALSE;
         }
 }
 
@@ -128,11 +131,11 @@ void commandS(char *buff){
 void dfs(int x, int y, char origc, char targetc){
     if(x<1 || x>M1 || y<1 || y>M2) return;
 
-    if(marks[y][x] == 1)return;
+    if(marks[y][x] == TRUE)return;
     else{
         if(image[y][x] == origc){
             image[y][x] = targetc;
-            marks[y][x] = 1;
+            marks[y][x] = TRUE;
             dfs(x+1, y, origc, targetc);
             dfs(x-1, y, origc, targetc);
             dfs(x, y+1, origc, targetc);
@@ -150,7 +153,7 @@ void commandF(char *buff){
     sscanf(buff, "%d %d %c", &x, &y, &targetc);
     for(i=1; i<=M2; i++){
         for(j=1; j<=M1; j++){
-            marks[i][j]=0;
+            marks[i][j]=FALSE;
         }
     }
     origc = image[y][x];
