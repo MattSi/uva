@@ -23,6 +23,12 @@ S NAME          ： 原样输出文件名以及整幅图像的像素矩阵
 X               ： 退出程序 
 */
 
+/*
+ * 1. 这道题需要非常细心。
+ * 2. 先列，后行。和通常理解的不同。
+ * 3. 区域填充的话，可以用图论中的DFS尝试，也可以用BFS尝试。
+ * */
+
 #define SIZE 256
 char image[SIZE][SIZE]; 
 char marks[SIZE][SIZE];
