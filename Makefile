@@ -1,6 +1,6 @@
 CC=cc
 CPP=g++
-CFLAGS=-O2 -pipe -ansi 
+CFLAGS=-O2 -pipe -ansi -g
 CPPFLAGS=-lm -lcrypt -O2 -pipe 
 LIBS=-lm  
 CPPLIBS=-lm -lcrypt -lstdc++
