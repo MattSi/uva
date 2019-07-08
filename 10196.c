@@ -44,27 +44,31 @@ void read_board(){
 
 int is_board_empty(){
 	int i, j;
-	/* 0 means empty, 1 means not empty */
+    int empty = 1;
 	for(i=0; i<SIZE; i++){
 		for(j=0; j<SIZE; j++){
-			if(board[i][i] != '.')
-				return FALSE;
+            if( board[i][j] != '.'){
+                empty = 0;
+            }
 		}
 	}
-	return TRUE;
+	return empty;
 }
 
 int main(int argc, char **argv){
 #ifndef ONLINE_JUDGE
 	freopen("./tests/10196.in","r", stdin);
 #endif
+    char buff[10];
 	while(1){
 		read_board();
+        fgets(buff, 10, stdin);
 		if(is_board_empty() == TRUE){
-			printf("Empty");
+			printf("Empty\n");
 			break;
 		}
-		printf("Not empty");
+
+		printf("Not empty\n");
 
 	}
 	return 0;
