@@ -97,7 +97,7 @@ int check_bishop(int i, int j, char target){
 	/* 1. 分别对左上、右上、右下、左下的方向进行检查  */
 	flag = 0;
 	for(t = 0; t < 4; t++){
-		di=0, dj=0;
+		di = bishop_di[t], dj = bishop_dj[t];
 		while(1){
 			if(!in_map(i+di, j+dj)) break;
 			if(board[i+di][j+dj] == '.'){
@@ -121,7 +121,7 @@ int check_rook(int i, int j, char target){
 	/* 1. 分别对左、上、右、下的方向进行检查  */
 	flag = 0;
 	for(t = 0; t < 4; t++){
-		di=0, dj=0;
+		di = rook_di[t], dj = rook_dj[t];
 		while(1){
 			if(!in_map(i+di, j+dj)) break;
 			if(board[i+di][j+dj] == '.'){
@@ -145,7 +145,7 @@ int check_queen(int i, int j, char target){
 	/* 1. 分别对左、上、右、下的方向进行检查  */
 	flag = 0;
 	for(t = 0; t < 8; t++){
-		di=0, dj=0;
+		di = queen_di[t], dj = queen_dj[t];
 		while(1){
 			if(!in_map(i+di, j+dj)) break;
 			if(board[i+di][j+dj] == '.'){
@@ -162,43 +162,60 @@ int check_queen(int i, int j, char target){
 }
 
 
-
-int check_king(int d, int i, int j){
+int king_di[] = {0,  -1, -1, -1, 0, 1, 1,  1};
+int king_dj[] = {-1, -1,  0,  1, 1, 1, 0, -1};
+int check_king(int i, int j, char target){
+	int flag, di, dj, t;
+	flag = 0;
+	for(t = 0; t<8; t++){
+		di = king_di[t];
+		dj = king_dj[t];
+		if(!in_map(i+di, j+dj)) continue;
+		if(board[i+di][j+dj] == target){
+			flag = 1;
+			return flag;
+		}
+	}
+	return flag;
 }
 
 void find_check(int d){
 	int i, j, flag;
 	char piece;
 
+	printf("Game #%d: ", d);
 	for(i=0; i<SIZE; i++){
 		for(j=0; j<SIZE; j++){
 			if(board[i][j] == '.') continue;
 			flag = 0;
-			switch(piece){
-				case 'p': flag = b_check_pawn(i, j);      break;
-				case 'P': flag = w_check_pawn(i, j);      break;
-				case 'n': flag = check_knight(i, j, 'K'); break;
-				case 'N': flag = check_knight(i, j, 'k'); break;
-				case 'b': flag = check_bishop(i, j, 'K'); break;
-				case 'B': flag = check_bishop(i, j, 'k'); break;
-				case 'r': flag = check_rook(i, j, 'K');   break;
-				case 'R': flag = check_rook(i, j, 'k');   break;
-				case 'q':
-				case 'Q':
-					if(!check_queen(d, i, j))
-						return;
-					break;
-				case 'k':
-				case 'K':
-					if(!check_king(d, i, j))
-						return;
-					break;
+			switch(board[i][j]){
+				case 'p': if(b_check_pawn(i, j)) flag = 1;       break;
+				case 'P': if(w_check_pawn(i, j)) flag = -1;      break;
+				case 'n': if(check_knight(i, j, 'K')) flag = 1;  break;
+				case 'N': if(check_knight(i, j, 'k')) flag = -1; break;
+				case 'b': if(check_bishop(i, j, 'K')) flag = 1;  break;
+				case 'B': if(check_bishop(i, j, 'k')) flag = -1; break;
+				case 'r': if(check_rook(i, j, 'K')) flag = 1;    break;
+				case 'R': if(check_rook(i, j, 'k')) flag = -1;   break;
+				case 'q': if(check_queen(i, j, 'K')) flag = 1;   break; 
+				case 'Q': if(check_queen(i, j, 'k')) flag = -1;  break;
+				case 'k': if(check_king(i, j, 'K')) flag = 1;    break;
+				case 'K': if(check_king(i, j, 'k')) flag = -1;   break;
 				default:
 					break;
 			}
+			if(flag == 1) {
+				printf("white king is in check.\n");
+				return;
+			}
+			if(flag == -1) {
+				printf("black king is in check.\n");
+				return;
+			}
 		}
 	}
-	printf("Game #%d: no king is in check.", d);
+	
+	printf("no king is in check.\n");
 }
 
 int main(int argc, char **argv){
@@ -206,15 +223,14 @@ int main(int argc, char **argv){
 	freopen("./tests/10196.in","r", stdin);
 #endif
     char buff[SIZE];
+	int d=0;
 	while(1){
 		read_board();
         fgets(buff, SIZE, stdin);
 		if(is_board_empty() == TRUE){
-			printf("Empty\n");
 			break;
 		}
-
-		
+		find_check(++d);
 	}
 	return 0;
 }
