@@ -115,7 +115,7 @@ int check_bishop(int i, int j, char target){
 
 int rook_di[] = { 0, -1, 0, 1};
 int rook_dj[] = {-1, 0,  1, 0}; 
-int check_rook(int d, int i, int j, char target){
+int check_rook(int i, int j, char target){
 	/* 车可以沿着水平或者竖直方向移动。 攻击王时，中间不能有遮挡。*/
 	int flag, di, dj, t;
 	/* 1. 分别对左、上、右、下的方向进行检查  */
@@ -138,9 +138,30 @@ int check_rook(int d, int i, int j, char target){
 
 }
 
-
-int check_queen(int d, int i, int j){
+int queen_di[] = { 0, -1, -1, -1, 0, 1, 1,  1};
+int queen_dj[] = {-1, -1,  0,  1, 1, 1, 0, -1};  
+int check_queen(int i, int j, char target){
+	int flag, di, dj, t;
+	/* 1. 分别对左、上、右、下的方向进行检查  */
+	flag = 0;
+	for(t = 0; t < 8; t++){
+		di=0, dj=0;
+		while(1){
+			if(!in_map(i+di, j+dj)) break;
+			if(board[i+di][j+dj] == '.'){
+				di += queen_di[t];
+				dj += queen_dj[t];
+			}else if(board[i+di][j+dj] == target) {
+				flag = 1; return flag;
+			}else{
+				break;
+			}
+		}
+	}
+	return flag;
 }
+
+
 
 int check_king(int d, int i, int j){
 }
