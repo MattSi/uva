@@ -7,7 +7,7 @@
 int DAYS[N];
 
 void hartals(int days, int index){
-	/* ¹«Ê½£º 
+	/* å…¬å¼ï¼š 
 		(index-1) + 0*index;
 		(index-1) + 1*index;
 		(index-1) + 2*index;
@@ -50,15 +50,15 @@ int main(int argc, char* argv[])
 		scanf("%d", &parties);
 		memset(DAYS, 0, sizeof(DAYS));
 
-		/* ¶ÔÃ¿¸öÕşµ³Í³¼ÆËüµÄ°Õ¹¤ÌìÊı*/
+		/* å¯¹æ¯ä¸ªæ”¿å…šç»Ÿè®¡å®ƒçš„ç½¢å·¥å¤©æ•°*/
 		for(i=0; i<parties; i++){
 			scanf("%d", &index);
 			hartals(days, index);
 		}
-		/* É¾³ıÖÜÁù£¬ÖÜÈÕ*/
+		/* åˆ é™¤å‘¨å…­ï¼Œå‘¨æ—¥*/
 		remove_holiday(days);
 
-		/* Í³¼Æ×ÜµÄ°Õ¹¤ÌìÊı */
+		/* ç»Ÿè®¡æ€»çš„ç½¢å·¥å¤©æ•° */
 		sum = 0;
 		for(i=0; i<days; i++){
 			if(DAYS[i] > 0)
