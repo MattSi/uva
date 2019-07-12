@@ -19,6 +19,44 @@ lock的作用是申请对所有变量的独占访问。lock和unlock总是成对
 输入n, t1, t2, t3, t4, t5, Q以及n个程序，按照时间顺序输出所有的print语句的程序编号和结果。
 */
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include <stdio.h>
 
 int main(int argc, char **argv){

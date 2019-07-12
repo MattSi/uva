@@ -20,7 +20,7 @@ all:$(ALL)
 	$(CC) $< -o $@ $(CFLAGS) $(LIBS) 
 133:133.c
 	$(CC) $< -o $@ $(CFLAGS) $(LIBS) 
-210:210.c
+210:210.cpp
 	$(CC) $< -o $@ $(CFLAGS) $(LIBS) 
 263:263.c
 	$(CC) $< -o $@ $(CFLAGS) $(LIBS) 
