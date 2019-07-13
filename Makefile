@@ -1,5 +1,5 @@
 CC=cc
-CPP=g++
+CPP=c++
 CFLAGS=-O2 -pipe -ansi -g
 CPPFLAGS=-lm -lcrypt -O2 -pipe 
 LIBS=-lm  
@@ -112,7 +112,7 @@ q8:q8.cpp
 11234:11234.c
 	$(CC) $< -o $@ $(CFLAGS) $(LIBS) 
 10474:10474.cpp
-	$(CC) $< -o $@ $(CFLAGS) $(LIBS) 
+	$(CPP) $< -o $@ $(CFLAGS) $(LIBS) 
 
 .PYONY: clean cleanobj cleanout
 clean:cleanobj cleanout

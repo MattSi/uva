@@ -26,8 +26,8 @@ int main(int argc, char **argv){
 		for(i=0; i<q; i++){
 			scanf("%d", &x);
 			int p = lower_bound(a, a+n, x) - a; //lower_bound的作用是查找 “大于或者等于x的第一个位置”, 返回的是一个迭代器iterator
-			if(a[p] == x) printf("%d found at %d\n", x, p);
-			else printf("%d not found", x);
+			if(a[p] == x) printf("%d found at %d\n", x, p+1);
+			else printf("%d not found\n", x);
 		}
 	}
 	return 0;
