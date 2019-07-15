@@ -1,4 +1,4 @@
-/*
+﻿/*
  * 为交易所设计一个订单处理系统。要求支持以下3种指令
  * 1. BUY p q: 有人想买，数量为p，价格为q
  * 2. SELL p q:有人想卖，数量为p，价格为q
@@ -14,13 +14,13 @@
  *
  */
 
+#include "pch.h"
 #include <cstdio>
 #include <cctype>
 #include <iostream>
 #include <cstdlib>
 #include <queue>
 #include <map>
-
 
 using namespace std;
 
@@ -35,20 +35,20 @@ struct CMD{
 };
 
 struct cmp_less{
-    bool operator()(CMD c1, CMD c2){
-        return c1.price <= c2.price;
+    bool operator()(CMD* c1, CMD* c2){
+        return c1->price <= c2->price;
     }
 };
 
 struct cmp_more{
-    bool operator()(CMD c1, CMD c2){
-        return c1.price >= c2.price;
+    bool operator()(CMD* c1, CMD* c2){
+        return c1->price >= c2->price;
     }
 };
 
 int n;
-priority_queue<CMD, vector<CMD>, cmp_less> buy_queue;
-priority_queue<CMD, vector<CMD>, cmp_more> sell_queue;
+priority_queue<CMD*, vector<CMD*>, cmp_less> buy_queue;
+priority_queue<CMD*, vector<CMD*>, cmp_more> sell_queue;
 map<int, CMD*> id_map;
 map<int, int> buy_cnt;
 map<int, int> sell_cnt;
@@ -60,7 +60,7 @@ void print_quote();
 
 int main(int argc, char **argv){
 #ifndef ONLINE_JUDGE
-    FILE *fp = freopen("./tests/1598.in", "r", stdin);
+    FILE *fp = freopen("c:\\temp\\20190714\\1598.in", "r", stdin);
 #endif
     while(scanf("%d\n", &n)==1){
         while(!buy_queue.empty())buy_queue.pop();
@@ -79,13 +79,13 @@ int main(int argc, char **argv){
                     case 'b':
                     case 'B':
                         update_cnt('B', price, quant); 
-                        buy_queue.push(*c);
+                        buy_queue.push(c);
                         find_trade('B');
                         break;
                     case 's':
                     case 'S':
                         update_cnt('S', price, quant); 
-                        sell_queue.push(*c);
+                        sell_queue.push(c);
                         find_trade('S');
                         break;
                     default:
@@ -124,24 +124,34 @@ int main(int argc, char **argv){
 // 在买入、卖出队列中寻找可能的交易
 void find_trade(char trigger){
 	while(!sell_queue.empty() && !buy_queue.empty()){
-		CMD lowest_sell = sell_queue.top();
-		CMD highest_buy = buy_queue.top();
-		if(lowest_sell.price <= highest_buy.price){
+		CMD* lowest_sell = sell_queue.top();
+		if(!lowest_sell->valid){
+			sell_queue.pop();
+			continue;
+		}
+		CMD* highest_buy = buy_queue.top();
+		if(!highest_buy->valid){
+			buy_queue.pop();
+			continue;
+		}
+		if(lowest_sell->price <= highest_buy->price){
 			//最小份额，发生交易
-			int low_quant = min(lowest_sell.quant, highest_buy.quant);
-			lowest_sell.quant -= low_quant;
-			highest_buy.quant -= low_quant;
+			int low_quant = min(lowest_sell->quant, highest_buy->quant);
+			lowest_sell->quant -= low_quant;
+			highest_buy->quant -= low_quant;
 			if(trigger == 'B'){
 				// 对于当前买订单，若当前最低卖价（ask price）低于当前出价，按照最低卖价, 最小份额，发生交易
-				printf("TRADE %d %d\n", low_quant, lowest_sell.price);
+				printf("TRADE %d %d\n", low_quant, lowest_sell->price);
 			}else{
 				// 对于当前卖订单，若当前最高买价（bid price）高于当前价格，则发生交易。
-				printf("TRADE %d %d\n", low_quant, highest_buy.price);
+				printf("TRADE %d %d\n", low_quant, highest_buy->price);
 			}
-			update_cnt(lowest_sell.c, lowest_sell.price, low_quant * -1);
-			update_cnt(highest_buy.c, highest_buy.price, low_quant * -1);								
-			if(lowest_sell.quant == 0) sell_queue.pop();
-			if(highest_buy.quant == 0) buy_queue.pop();
+			update_cnt(lowest_sell->c, lowest_sell->price, low_quant * -1);
+			update_cnt(highest_buy->c, highest_buy->price, low_quant * -1);								
+			if(lowest_sell->quant == 0) sell_queue.pop();
+			if(highest_buy->quant == 0) buy_queue.pop();
+		}else {
+			break;
 		}
 	}
 }
