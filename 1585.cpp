@@ -1,3 +1,15 @@
+/*
+得分：给出一个由O和X组成的串（长度为1-80），统计得分。
+每个O的得分为目前连续出现O的个数，X的得分为0。
+例如 OOXXOXXOOO的得分为1+2+0+0+1+0+0+1+2+3=10
+
+*/
+
+/*
+Windows和Linux环境下，回车换行符是不同的。
+Linux下为\n
+Windows下\r\n
+*/
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
