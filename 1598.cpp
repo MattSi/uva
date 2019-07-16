@@ -14,7 +14,6 @@
  *
  */
 
-//#include "pch.h"
 #include <cstdio>
 #include <cctype>
 #include <iostream>
