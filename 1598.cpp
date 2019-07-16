@@ -67,10 +67,10 @@ int main(int argc, char **argv) {
 	
 #ifndef ONLINE_JUDGE
 	FILE *fp = freopen("./tests/1598.in", "r", stdin);
-	fp = freopen("./tests/1598.out", "w", stdout);
+	//fp = freopen("./tests/1598.out", "w", stdout);
 #endif
 	int cases=0;
-	while (scanf("%d\n", &n) == 1) {
+	while (scanf("%d", &n) == 1) {
 		buy_queue = priority_queue<CMD*, vector<CMD*>, cmp_less>();
 		sell_queue = priority_queue<CMD*, vector<CMD*>, cmp_more>();
 		id_map.clear();
@@ -81,7 +81,7 @@ int main(int argc, char **argv) {
 		char inst[8];
 		int quant, price;
 		for (int i = 1; i <= n; i++) {
-			if (scanf("%s %d %d\n", inst, &quant, &price) == 3) {
+			if (scanf("%s %d %d", inst, &quant, &price) == 3) {
 				CMD *c = new CMD(i, toupper(inst[0]), quant, price, true);
 				id_map.insert(pair<int, CMD*>(i, c));
 				switch (inst[0]) {

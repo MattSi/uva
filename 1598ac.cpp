@@ -66,9 +66,9 @@ void print() {
 }
 int main() {
 
-	#ifndef ONLINE_JUDGE
+#ifndef ONLINE_JUDGE
 	FILE *fp = freopen("./tests/1598.in", "r", stdin);
-	fp = freopen("./tests/1598ac.out", "w", stdout);
+	//fp = freopen("./tests/1598ac.out", "w", stdout);
 #endif
     int Q, cases = 0;
     char cmd[16];
