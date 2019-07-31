@@ -33,7 +33,7 @@ Q
 using namespace std;
 
 const int SIZE=8;
-char board[SIZE+1][SIZE+2];
+char board[SIZE+2][SIZE+2];
 char curr_player;
 
 void init_board(){
