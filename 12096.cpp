@@ -23,6 +23,7 @@ int main() {
 #ifndef ONLINE_JUDGE
 	FILE *fp = freopen("./tests/12096.in", "r", stdin);
 #endif
+	未完成
 
 	return 0;
 }

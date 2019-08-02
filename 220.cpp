@@ -57,7 +57,12 @@ char get_cp_player(char c_player){
 bool is_p_valid(int r, int c, char c_player){
 	char cp = get_cp_player(c_player);
 	bool valid = true;
+	int dj[]={-1, -1,  0,  1, 1, 1, 0, -1};
+	int di[]={ 0, -1, -1, -1, 0, 1, 1,  1}; 
 	if(board[r][c] != '-') return false;
+	for(int step=0; step<8; step++){
+
+	}
 	
 
 
@@ -65,11 +70,16 @@ bool is_p_valid(int r, int c, char c_player){
 }
 
 void p_valid_pos(){
+	bool first=true;
 	for(int i=1; i<=SIZE; i++){
 		for(int j=1; j<=SIZE; j++){
-		
+			if(is_p_valid(i, j, curr_player)){
+				if(first){printf("(%d,%d)", i, j);first=false;}
+				else printf(" (%d,%d)", i, j);
+			}
 		}
 	}
+	printf("\n");
 }
 void simulate(){
 	char cmd[8];
