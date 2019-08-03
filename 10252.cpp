@@ -33,8 +33,15 @@ int main() {
 		sort(buf1, buf1+len1); sort(buf2, buf2+len2);
 
 		i1 = i2 = isub = 0;
-		printf("%s\n", buf1);
-		printf("%s\n", buf2);
+        while(buf1[i1]!='\0' && buf2[i2]!='\0'){
+            if(buf1[i1] < buf2[i2]) i1++;
+            else if(buf1[i1] > buf2[i2]) i2++;
+            else {
+                sub[isub++] = buf1[i1];
+                i1++; i2++;
+            }
+        }
+        printf("%s\n", sub);
 	}
 	return 0;
 }
