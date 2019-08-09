@@ -263,7 +263,7 @@ cleanobj:
 
 cleanout:
 	-rm -f $(TESTDIR)*.out
-	-rm -f *.out
+	-rm -f *.out *.core
 
 
 

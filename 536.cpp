@@ -24,7 +24,7 @@ struct Node{
 
 Node* build_tree(char *preod, int s1, int f1, char *inord, int s2, int f2){
 	Node *root;
-	int mid= -1;
+	int mid=0, step=0;
 	if(s1>f1) return NULL;
 	
 	root = (Node*)malloc(sizeof(struct Node));
@@ -37,8 +37,9 @@ Node* build_tree(char *preod, int s1, int f1, char *inord, int s2, int f2){
 			break;
 		}
 	}
-	if(mid!=-1 && mid != f2)root->right = build_tree(preod, mid+1, f1, inord, mid+1, f2);
-	root->left = build_tree(preod, s1+1, mid, inord, s2, mid-1);
+	step = mid-s2;
+	root->right = build_tree(preod, s1+1+step, f1, inord, mid+1, f2);
+	root->left = build_tree(preod, s1+1, s1+step, inord, s2, mid-1);
 	return root;
 }
 
