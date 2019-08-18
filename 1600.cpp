@@ -15,38 +15,64 @@ UVa:1600
 #include <algorithm>
 
 using namespace std;
-const int SIZE=25;
+
+const int SIZE = 25;
 int board[SIZE][SIZE];
 int   vis[SIZE][SIZE];
-queue<int> que;
+const int R[] = { 0, -1, 0, 1 };
+const int C[] = { -1, 0, 1, 0 };
 
-int travel(int m, int n, int k){
-	int tmp = 100*m+n;
-	que.push(tmp);
-	while(!que.empty()){
-		tmp = que.front(); que.pop();
-		m = tmp/100;
-		n = tmp%100;
-		if(vis[m][n] == -1)
+struct Node {
+	int r;
+	int c;
+	int step;
+	Node(int rr, int cc, int sstep) :r(rr), c(cc), step(sstep) {}
+};
+queue<Node> que;
+int K;
+
+bool valid_position(int r, int c) {
+	if(r>=1 &&r<=)
+}
+void push_queue(Node& node) {
+	for (int i = 0; i < 4; i++) {
+
+	}
+}
+
+int travel(int m, int n) {
+	int step = 0;
+	que.push(Node(1,1,step));
+	vis[1][1] = step;
+
+	while (!que.empty()) {
+		Node tmp = que.front(); que.pop();
+		int r = tmp.r;
+		int c = tmp.c;
+		int s = tmp.step;
+		if (r == m && c == n) {
+			return s;
+		}
+		push_queue(tmp);
 	}
 	return -1;
 }
 int main() {
 #ifndef ONLINE_JUDGE
-	FILE *fp = freopen("./tests/1600.in", "r", stdin);
+	FILE* fp = freopen("./tests/1600.in", "r", stdin);
 #endif
-	int cases, k, m, n;
+	int cases, m, n;
 	scanf("%d", &cases);
-	while(cases--){
+	while (cases--) {
 		scanf("%d%d", &m, &n);
-		scanf("%d", &k);
+		scanf("%d", &K);
 		memset(board, 0, sizeof(board));
 		memset(vis, -1, sizeof(vis));
-		for(int i=1; i<=m; i++)
-			for(int j=1; j<=n; j++)
+		for (int i = 1; i <= m; i++)
+			for (int j = 1; j <= n; j++)
 				scanf("%d", &board[i][j]);
-		while(!que.empty())que.pop();
-		int ans = travel(m,n,k);
+		while (!que.empty())que.pop();
+		int ans = travel(m, n);
 		printf("%d\n", ans);
 	}
 
